@@ -31,15 +31,15 @@ export const Ruler = () => {
         const rawPositon = Math.max(0, Math.min(816, relativeX));
 
         if (isDraggingLeft) {
-          const maxLeftPostion = 816 - rightMargin - 100;
-          const newLeftPosition = Math.min(rawPositon, maxLeftPostion);
+          const maxLeftPosition = 816 - rightMargin - MINIMUM_SPACE;
+          const newLeftPosition = Math.min(rawPositon, maxLeftPosition);
           setLeftMargin(newLeftPosition); //TODO: Make collaborative
         } else if (isDraggingRight) {
-          const maxRightPosition = 816 - (leftMargin + 100);
-          const newRightPosition = Math.max(816 - rawPositon, 0);
-          const constrainedRightPosition = Math.min(
-            newRightPosition,
-            maxRightPosition
+          const maxRightPosition = 816 - (leftMargin + MINIMUM_SPACE);
+          const newRightPosition = 816 - rawPositon;
+          const constrainedRightPosition = Math.max(
+            Math.min(newRightPosition, maxRightPosition),
+            MINIMUM_SPACE
           );
           setRightMargin(constrainedRightPosition);
         }
@@ -66,11 +66,11 @@ export const Ruler = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      className="h-6 border-b border-gray-300 flex items-end relative select-none print:hidden"
+      className="w-[816px] h-6 border-b border-gray-300 flex items-end relative select-none print:hidden"
     >
       <div
         id="ruler-container"
-        className="max-w-[816px] mx-auto w-full h-6 relative"
+        className="w-full h-full relative"
       >
         <Marker
           position={leftMargin}
@@ -89,7 +89,7 @@ export const Ruler = () => {
         <div className="absolute inset-x-0 bottom-0 h-full">
           <div className="relative h-full w-[816px]">
             {markers.map((marker) => {
-              const position = (marker * 816) / 82;
+              const position = (marker * 816) / 83;
               return (
                 <div
                   key={marker}
@@ -100,7 +100,7 @@ export const Ruler = () => {
                     <>
                       <div className="absolute bottom-0 w-[1px] h-2 bg-neutral-500" />
                       <span className="absolute bottom-2 text-[10px] text-neutral-500 transform -translate-x-1/2">
-                        {marker / 10 + 1}
+                        {Math.floor(marker / 10) + 1}
                       </span>
                     </>
                   )}
