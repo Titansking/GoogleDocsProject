@@ -6,14 +6,13 @@ import { Navbar } from './navbar';
 import { TemplatesGallery } from './templates-gallery';
 
 import { api } from '../../../convex/_generated/api';
-import { useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/nextjs";
 
 
 const Home = () => {
   const { user, isLoaded } = useUser();
 
-  // Only fetch documents if user is authenticated
-  const documents = user ? useQuery(api.documents.get, { userId: user.id }) : [];
+  const documents = useQuery(api.documents.get, user ? { userId: user.id } : "skip");
 
   if (!isLoaded) {
     return (
