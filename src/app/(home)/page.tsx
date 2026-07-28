@@ -1,37 +1,50 @@
 "use client";
 
 
-import { useQuery } from 'convex/react';
+import { usePaginatedQuery } from 'convex/react';
 import { Navbar } from './navbar';
 import { TemplatesGallery } from './templates-gallery';
 
 import { api } from '../../../convex/_generated/api';
 import { useUser } from "@clerk/nextjs";
+import { DocumentsTable } from './documents-table';
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+}from "@/components/ui/table";
 
 
 const Home = () => {
   const { user, isLoaded } = useUser();
 
-  const documents = useQuery(api.documents.get, user ? { userId: user.id } : "skip");
+  const { results, 
+    status, 
+    loadMore 
+  } = usePaginatedQuery(api.documents.get, {} ,{initialNumItems: 5});
 
-  if (!isLoaded) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Loading...</p>
-      </div>
-    );
-  }
+  // if (!isLoaded) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center">
+  //       <p>Loading...</p>
+  //     </div>
+  //   );
+  // }
 
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F1F3F4]">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold mb-4">Welcome to Docs</h1>
-          <p className="mb-6">Please sign in to continue</p>
-        </div>
-      </div>
-    );
-  }
+   // if (!user) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center bg-[#F1F3F4]">
+  //       <div className="text-center">
+  //         <h1 className="text-2xl font-semibold mb-4">Welcome to Docs</h1>
+  //         <p className="mb-6">Please sign in to continue</p>
+  //       </div>
+  //     </div>
+  //   );
+   // }
 
   return(
     <div className="min-h-screen flex-col bg-[#F1F3F4]">
@@ -40,10 +53,12 @@ const Home = () => {
       </div >
       <div className="mt-16">
      <TemplatesGallery />
-     {documents?.map((document) => (
-      <span key={document._id}>{document.title}</span>
-     ))}
-     </div>
+     <DocumentsTable 
+     documents = {results}
+      loadMore={loadMore} 
+     status={status}
+       />
+      </div>
     </div>
   );
 }
