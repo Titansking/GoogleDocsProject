@@ -9,6 +9,8 @@ import {
 import { ReactNode } from "react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ClerkProvider, useAuth, SignIn } from "@clerk/nextjs";
+import { LoaderIcon } from "lucide-react";
+
 
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
@@ -28,7 +30,8 @@ export function ConvexClientProvider({ children }: { children: ReactNode }) {
         </Unauthenticated>
         <AuthLoading>
           <div className="flex flex-col items-center justify-center min-h-screen">
-            <p>Loading auth...</p>
+            <LoaderIcon className="animate-spin text-muted-foreground size-5" />
+            <span className="mt-2 text-sm text-muted-foreground">Auth Loading...</span>
           </div>
         </AuthLoading>
       </ConvexProviderWithClerk>

@@ -34,8 +34,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { useEditorStore } from "@/store/use-editor-store";
-import { Separator } from "@/components/ui/separator";
-import { Label } from "recharts"; 
+import { Separator } from "@/components/ui/separator"; 
 import{
   DropdownMenu,
   DropdownMenuContent,

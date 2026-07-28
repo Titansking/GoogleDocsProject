@@ -1,31 +1,20 @@
 "use client";
 
+import { usePaginatedQuery } from "convex/react";
+import { Navbar } from "./navbar";
+import { TemplatesGallery } from "./templates-gallery";
 
-import { usePaginatedQuery } from 'convex/react';
-import { Navbar } from './navbar';
-import { TemplatesGallery } from './templates-gallery';
-
-import { api } from '../../../convex/_generated/api';
-import { useUser } from "@clerk/nextjs";
-import { DocumentsTable } from './documents-table';
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-}from "@/components/ui/table";
-
+import { api } from "../../../convex/_generated/api";
+import { DocumentsTable } from "./documents-table";
 
 const Home = () => {
-  const { user, isLoaded } = useUser();
+  // const { user, isLoaded } = useUser();
 
-  const { results, 
-    status, 
-    loadMore 
-  } = usePaginatedQuery(api.documents.get, {} ,{initialNumItems: 5});
+  const { results, status, loadMore } = usePaginatedQuery(
+    api.documents.get,
+    {},
+    { initialNumItems: 5 },
+  );
 
   // if (!isLoaded) {
   //   return (
@@ -35,7 +24,7 @@ const Home = () => {
   //   );
   // }
 
-   // if (!user) {
+  // if (!user) {
   //   return (
   //     <div className="min-h-screen flex items-center justify-center bg-[#F1F3F4]">
   //       <div className="text-center">
@@ -44,23 +33,23 @@ const Home = () => {
   //       </div>
   //     </div>
   //   );
-   // }
+  // }
 
-  return(
-    <div className="min-h-screen flex-col bg-[#F1F3F4]">
+  return (
+    <div className="min-h-screen flex-col">
       <div className="fixed top-0 left-0 right-0 z-10 h-16 bg-white p-4">
         <Navbar />
-      </div >
+      </div>
       <div className="mt-16">
-     <TemplatesGallery />
-     <DocumentsTable 
-     documents = {results}
-      loadMore={loadMore} 
-     status={status}
-       />
+        <TemplatesGallery />
+        <DocumentsTable
+          documents={results}
+          loadMore={loadMore}
+          status={status}
+        />
       </div>
     </div>
   );
-}
+};
 
 export default Home;

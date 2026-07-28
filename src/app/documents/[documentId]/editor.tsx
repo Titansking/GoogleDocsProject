@@ -7,7 +7,6 @@ import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
-import Image from "@tiptap/extension-image";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from '@tiptap/extension-link';
 import { Color } from "@tiptap/extension-color";
@@ -24,13 +23,13 @@ import {  LineHeightExtension } from "@/extensions/line-height";
 import { Ruler } from "./ruler";
 
 
-export const Editor = () => {
+export const Editor = ({ initialContent }: { initialContent?: string }) => {
 
   const { setEditor } = useEditorStore();
 
     
   const editor = useEditor({
-    
+    content: initialContent || '',
     immediatelyRender: false,
 
     onCreate({ editor }) {
@@ -81,7 +80,6 @@ export const Editor = () => {
       FontFamily,
       TextStyle,
       Underline,
-      Image,
       ImageResize,
       Table,
       TableRow,
