@@ -28,15 +28,15 @@ export const Ruler = () => {
       if (container) {
         const containerRect = container.getBoundingClientRect();
         const relativeX = e.clientX - containerRect.left;
-        const rawPositon = Math.max(0, Math.min(816, relativeX));
+        const rawPositon = Math.max(0, Math.min(PAGE_WIDTH, relativeX));
 
         if (isDraggingLeft) {
-          const maxLeftPosition = 816 - rightMargin - MINIMUM_SPACE;
+          const maxLeftPosition = PAGE_WIDTH - rightMargin - MINIMUM_SPACE;
           const newLeftPosition = Math.min(rawPositon, maxLeftPosition);
           setLeftMargin(newLeftPosition); //TODO: Make collaborative
         } else if (isDraggingRight) {
-          const maxRightPosition = 816 - (leftMargin + MINIMUM_SPACE);
-          const newRightPosition = 816 - rawPositon;
+          const maxRightPosition = PAGE_WIDTH - (leftMargin + MINIMUM_SPACE);
+          const newRightPosition = PAGE_WIDTH - rawPositon;
           const constrainedRightPosition = Math.max(
             Math.min(newRightPosition, maxRightPosition),
             MINIMUM_SPACE

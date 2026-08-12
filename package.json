@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:next": "next dev",
+    "convex": "npx convex dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

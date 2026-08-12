@@ -29,7 +29,7 @@ export const Document = ({ documentId }: DocumentProps) => {
             <div className="min-h-screen bg-[#FAFBFD] flex items-center justify-center">
                 <div className="text-center">
                     <h1 className="text-2xl font-bold">Document Not Found</h1>
-                    <p className="text-gray-500">The document you're looking for doesn't exist.</p>
+                    <p className="text-gray-500">The document you&apos;re looking for doesn&apos;t exist.</p>
                 </div>
             </div>
         );

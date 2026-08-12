@@ -56,7 +56,7 @@ export const RenameDialog = ({ documentId, initialTitle, children }: RenameDialo
         <form onSubmit={onSubmit}>
           <DialogHeader>
             <DialogTitle> Rename Document </DialogTitle>
-            <DialogDescription> Enter a new name fotr this document </DialogDescription>
+            <DialogDescription>Enter a new name for this document</DialogDescription>
           </DialogHeader>
           <div className="my-4">
             <Input
