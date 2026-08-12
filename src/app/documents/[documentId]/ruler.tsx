@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 
+const PAGE_WIDTH = 816;
 const markers = Array.from({ length: 83 }, (_, i) => i);
 
 export const Ruler = () => {
@@ -20,7 +21,6 @@ export const Ruler = () => {
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    const PAGE_WIDTH = 816;
     const MINIMUM_SPACE = 100;
 
     if ((isDraggingLeft || isDraggingRight) && rulerRef.current) {
